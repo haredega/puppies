@@ -6,9 +6,10 @@ from database_setup import Base, Shelter, Puppy
 from random import randint
 import datetime
 import random
+import os
 
 
-engine = create_engine('postgres://gtjypbmogjtjbr:GKcpbGlzrLj9JlXR-S03kTXup4@ec2-107-20-148-211.compute-1.amazonaws.com:5432/d78btdqq3a0f69')
+engine = create_engine(os.environ['DATABASE_URL'])
 
 Base.metadata.bind = engine
 
