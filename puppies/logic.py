@@ -91,6 +91,5 @@ def view_puppy(item_id):
         flash('7')
     else:
         item = q4
-        flash('8')
-    flash(item)    
+        flash('8') 
     return item
