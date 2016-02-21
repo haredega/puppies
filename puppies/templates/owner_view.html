@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang='pt'>
+<head>
+  <title>Item view</title>
+  <link href='{{url_for('static', filename='css/bootstrap.css')}}' rel='stylesheet'>
+  <link href='{{url_for('static', filename='css/village.css')}}' rel='stylesheet'>
+</head>
+
+<body>
+  <nav class='navbar navbar-fixed-top'  id='top'>
+    <div class='container-fluid'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='{{url_for('index')}}'>Puppy Shelter Village</a>
+        <a class='navbar-brand' href='{{url_for('list_view', list_type=list_type )}}'  >\Our {{list_type}}</a>
+        <a class='navbar-brand' href='{{url_for('item_view', list_type=list_type, item_id=item_id)}}'  >\{{item.name}}</a>
+      </div>
+      <div class='navbar-collapse collapse'>
+          <form class="navbar-form navbar-right" id='search'>
+            <input type="text" class="form-control" placeholder="Search All">
+            <input type="submit" value="Submit" class="btn">
+          </form>
+      </div>
+    </div>
+  </nav>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-10 col-sm-9 main'>
+      <div class='row'>
+        <div class='col-md-4 col-sm-4'>
+          <h2>{{item.name}} {{item.surname}}</h2>
+        </div>
+        <div class='col-md-8 col-sm-8' id='profile'>
+          <p>Gender: {{item.gender}}</p>
+          <p>Age: {{item.age}}  </p>
+          <p>Address: ?  </p>
+          <p>Telephone number: ?    </p>
+          <p>Members in the family: ?  </p>
+          <p> Has already adopted: ?   </p>
+        </div>
+      </div>
+      {% if pets is not none %}
+      <div class='row'>
+        {% for pet in pets %}
+        <div class='col-md-3 col-sm-6'>
+        <div class='list' style='background-image: url("{{pet.picture}}")'>
+        <h3><a href="{{url_for('item_view', list_type = 'puppies', item_id=pet.id)}}">{{pet.name}}</a></h3>
+        <p>Age: {{ pet.dateOfBirth }}</p>
+        <p>Gender: {{pet.gender}}</p>
+        <p>Weight: {{pet.weight}}</p>
+        {% if pet.shelter_id is not none %}
+        <p>This pet is still assigned to a <a href='{{url_for('list_view', list_type='shelters')}}'>Shelter!!</a>!!</p>
+        {% endif %}
+        <p><a href='{{url_for('return_puppy', item_id=pet.id, owner_id=item.id)}}' id='return'>Return pet</a></p>
+
+        <p><a href='{{url_for('item_edit', list_type = 'puppies', item_id=pet.id)}}' id='edit'>Edit</a></p>
+        </div>
+        </div>
+        <!-- Testing layout
+        <div class='col-md-6 col-sm-6' id='pets'>
+          <p>Name: {{pet.name}}</p>
+          <p>Date of birth: {{pet.dateOfBirth}}</p>
+          <p>Gender: {{pet.gender}}</p>
+          <p>Weight: {{pet.weight}}</p>
+        </div> -->
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
+    <div class='col-md-2 col-sm-3 sidebar-right'>
+        <div class='owner-sidebar'>
+          <p id='button'><a href="#" >Send e-mail</a></p>
+          <!-- HIDDEN   <form class="navbar-form navbar-right" id='user-connection'>
+                Login: <input type="text" class="form-control" placeholder="login">
+                Password:<input type="text" class="form-control" placeholder="password">
+                <input type="submit" value="Submit" class="btn">
+              </form> -->
+          <ul class="nav nav-sidebar">
+             <li><a href="{{url_for('item_edit', list_type=list_type, item_id=item_id)}}">Edit</a></li>
+             <li><a href="{{url_for('item_delete', list_type=list_type, item_id=item_id)}}">Delete</a></li>
+          </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

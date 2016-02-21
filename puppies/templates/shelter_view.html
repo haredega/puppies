@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang='pt'>
+<head>
+  <title>Item view</title>
+  <link href='{{url_for('static', filename='css/bootstrap.css')}}' rel='stylesheet'>
+  <link href='{{url_for('static', filename='css/village.css')}}' rel='stylesheet'>
+</head>
+
+<body>
+  <nav class='navbar navbar-fixed-top'  id='top'>
+    <div class='container-fluid'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='{{url_for('index')}}'>Puppy Shelter Village</a>
+        <a class='navbar-brand' href='{{url_for('list_view', list_type=list_type )}}'  >\Our {{list_type}}</a>
+        <a class='navbar-brand' href='{{url_for('item_view', list_type=list_type, item_id=item_id)}}'  >\{{item.name}}</a>
+      </div>
+      <div class='navbar-collapse collapse'>
+          <form class="navbar-form navbar-right" id='search'>
+            <input type="text" class="form-control" placeholder="Search All">
+            <input type="submit" value="Submit" class="btn">
+          </form>
+      </div>
+    </div>
+  </nav>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-10 col-sm-9 main'>
+      <div class='row'>
+        <div class='col-md-4 col-sm-4'>
+          <h2>{{item.name}}</h2>
+        </div>
+        <div class='col-md-8 col-sm-8' id='profile'>
+          <p>Address: {{item.address}}, {{item.city}}</p>
+          <p>State: {{item.state}}  </p>
+          <p>Zip Code: {{item.zipCode}}          </p>
+          <p>Website: <a href='{{item.website}}'>{{item.name}} </a></p><br>
+          <p><a href='{{url_for('puppies_filtered', item_id = item.id)}}' id='view'> See our puppies!</a></p>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-2 col-sm-3 sidebar-right'>
+        <div class='shelter-sidebar'>
+          <p id='button'><a href="#" >Get in touch!</a></p>
+          <!-- HIDDEN   <form class="navbar-form navbar-right" id='user-connection'>
+                Login: <input type="text" class="form-control" placeholder="login">
+                Password:<input type="text" class="form-control" placeholder="password">
+                <input type="submit" value="Submit" class="btn">
+              </form> -->
+          <ul class="nav nav-sidebar">
+             <li class="active"><a href="#">Subscription<span class="sr-only"></span></a></li>
+             <li><a href="{{url_for('item_edit', list_type=list_type, item_id=item_id)}}">Edit</a></li>
+             <li><a href="{{url_for('item_delete', list_type=list_type, item_id=item_id)}}">Delete</a></li>
+             <li><a href="{{url_for('balance_population')}}">Balance Population</a> </li>
+          </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>
