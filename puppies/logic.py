@@ -7,7 +7,6 @@ from sqlalchemy import func
 from numpy import size
 import string
 import os
-from flask import flash
 
 engine = create_engine(os.environ['DATABASE_URL'])
 Base.metadata.bind=engine
@@ -72,24 +71,16 @@ def population_balancing( shelters ):
 
 def view_puppy(item_id):
     q1 = session.query(Puppy, Shelter, Owner).filter(Puppy.id==item_id, Puppy.shelter_id==Shelter.id, Puppy.owner_id==Owner.id).first()
-    flash("1")
     q2 = session.query(Puppy, Shelter, Owner).filter(Puppy.id==item_id, Shelter.id==1, Puppy.owner_id==Owner.id).first()
-    flash('2')
     q3 =session.query(Puppy, Shelter, Owner).filter(Puppy.id==item_id, Puppy.shelter_id==Shelter.id, Owner.id==1).first()
-    flash('3')
     q4 = session.query(Puppy, Shelter, Owner).filter(Puppy.id==item_id, Shelter.id==1, Owner.id==1).first()
-    flash('4')
     #If there's no corresponding Shelter, we'll send whatever shelter to the template
     if q1 is not None:
         item = q1
-        flash('5')
     elif q2 is not None:
         item = q2
-        flash('6')
     elif q3 is not None:
         item = q3
-        flash('7')
     else:
         item = q4
-        flash('8') 
     return item
