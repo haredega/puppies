@@ -12,6 +12,7 @@ from forms import *
 import logging
 from logging import Formatter, FileHandler
 from logging.handlers import RotatingFileHandler
+import os
 
 
 engine = create_engine(os.environ['DATABASE_URL'])
