@@ -11,6 +11,7 @@
 # Virtualenv
 env
 
+
 # Website content #
 
 *.jpg
@@ -36,9 +37,9 @@ env
 ######################
 *.log
 *.out
-
 *.sql
 *.sqlite
+log
 
 # OS generated files #
 ######################
