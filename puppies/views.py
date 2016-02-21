@@ -19,13 +19,13 @@ DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
 # Sets up logger and the handler
-LOG_FILENAME = 'log/puppylog_'+'.log'
+"""LOG_FILENAME = 'log/puppylog_'+'.log'
 log_format = '%(asctime)s  - %(levelname)s -  %(message)s'
 log_dtfmt='%d/%m/%Y %I:%M:%S %p'
-"""logging.basicConfig(format=log_format, datefmt=log_dtfmt)
+logging.basicConfig(format=log_format, datefmt=log_dtfmt)
 app.logger.setLevel(logging.INFO)
 handler = logging.handlers.RotatingFileHandler(
-              LOG_FILENAME, maxBytes=24, backupCount=5)"""
+              LOG_FILENAME, maxBytes=24, backupCount=5)
 #tentativa 2
 file_handler = RotatingFileHandler(LOG_FILENAME,
     maxBytes=2*1024*1024,
@@ -41,7 +41,7 @@ handler.setFormatter(Formatter(
      ))
 app.logger.addHandler(handler)
 app.logger.addHandler(file_handler)
-app.logger.error('First test message...')
+app.logger.error('First test message...')"""
 
 @app.route('/')
 @app.route('/index')
@@ -142,7 +142,7 @@ def item_new(list_type):
                 return redirect(url_for('item_new', list_type = list_type))
         session.add(newItem)
         session.commit()
-        app.logger.info('Added %s %s to the database.', list_type, form.name.data)
+        #app.logger.info('Added %s %s to the database.', list_type, form.name.data)
         flash("Succesfully added "+form.name.data+"!")
         return redirect(url_for('list_view', list_type=list_type))
 
@@ -166,7 +166,7 @@ def item_delete(list_type, item_id):
     elif request.method =='POST':
         session.delete(item)
         session.commit()
-        app.logger.info('Removed %s id %s  ( %s ) from the database.', list_type, item_id, item.name)
+        #app.logger.info('Removed %s id %s  ( %s ) from the database.', list_type, item_id, item.name)
         return redirect(url_for('list_view', list_type=list_type))
 
 
@@ -264,7 +264,7 @@ def item_edit(list_type, item_id):
             item.age = form.age.data
         session.add(item)
         session.commit()
-        app.logger.info('Edited %s id %s  ( %s ) from the database.', list_type, item_id, item.name)
+        #app.logger.info('Edited %s id %s  ( %s ) from the database.', list_type, item_id, item.name)
         flash("Succesfully edited "+form.name.data+"!")
         return redirect(url_for('list_view', list_type=list_type))
 
@@ -292,7 +292,7 @@ def adopt_confirm(list_type, item_id, owner_id):
             puppy.shelter_id =None
             session.add(puppy)
             session.commit()
-            app.logger.info('Adopted %s. Puppy id: %s; Owner id:%s from the database.', list_type, puppy.id, owner.id)
+            #app.logger.info('Adopted %s. Puppy id: %s; Owner id:%s from the database.', list_type, puppy.id, owner.id)
             return redirect(url_for('item_view', list_type=list_type, item_id=item_id))
     else:
         return render_template('error404.html')
@@ -312,7 +312,7 @@ def return_puppy(item_id, owner_id):
         puppy.shelter_id = request.form['shelter']
         session.add(puppy)
         session.commit()
-        app.logger.info('Returned %s. Puppy id: %s; Owner id:%s; Shelter id: %s from the database.', list_type, puppy.id, owner.id, reques.form['shelter'])
+        #app.logger.info('Returned %s. Puppy id: %s; Owner id:%s; Shelter id: %s from the database.', list_type, puppy.id, owner.id, reques.form['shelter'])
         return redirect(url_for('item_view', list_type = 'owners', item_id=owner.id))
 
 
