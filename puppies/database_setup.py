@@ -61,7 +61,7 @@ class Owner(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(40), nullable=False)
     surname = Column(String(60), nullable=False)
-    gender =  Column(String(2), nullable=False)
+    gender =  Column(String(6), nullable=False)
     age = Column(Integer, nullable=False)
     puppy= relationship("Puppy")
 
