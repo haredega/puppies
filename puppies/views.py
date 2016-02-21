@@ -13,7 +13,7 @@ import logging
 from logging import Formatter, FileHandler
 from logging.handlers import RotatingFileHandler
 
-engine = create_engine('sqlite:///puppyshelter.db')
+engine = create_engine('postgres://gtjypbmogjtjbr:GKcpbGlzrLj9JlXR-S03kTXup4@ec2-107-20-148-211.compute-1.amazonaws.com:5432/d78btdqq3a0f69')
 Base.metadata.bind=engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
