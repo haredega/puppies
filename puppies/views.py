@@ -339,6 +339,8 @@ def puppies_filtered(item_id):
 @app.route('/puppies/filter/<string:letter>')
 def puppies_aZ(letter):
     items = session.query(Puppy).filter(Puppy.name.like(letter+'%')).order_by(Puppy.name).all()
+    item1 = session.query(Puppy).filter(Puppy.name.like(letter+'%')).order_by(Puppy.name).first()
+    flash(item1.name)
     alphabet = string.ascii_lowercase
     if not items:
         return redirect(url_for('list_view', list_type= 'puppies'))
